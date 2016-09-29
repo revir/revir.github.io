@@ -22,7 +22,7 @@ comments: false
 ### CV Hunting
 * [官网](http://www.cvhunting.com) 和 [chrome webstore](https://chrome.google.com/webstore/detail/cv-hunting/onjhjfmflpenlonkkipmnknbeikecoee)
 
-这是一个帮助猎头朋友们备份和获取 Linkedin 上的联系人信息的软件，免费， 无需注册，开箱即用。 软件前端基于 chrome extension 开发，支持各大 chromium 内核的浏览器。前端使用了 angular 框架， 后端基于 Python 的 Flask 框架。项目由我一个人单独完成。
+这是一个帮助猎头朋友们备份和获取 Linkedin 上的联系人信息的软件，免费， 无需注册，开箱即用。 软件前端基于 chrome extension 开发，支持各大 chromium 内核的浏览器。前端使用了 angular 框架， 后端基于 Python 的 Flask 框架。
 ![Alt text](/img/about/ss.png)
 
 ### 海牛直播
