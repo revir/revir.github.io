@@ -111,6 +111,10 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
+      title: "V2MM: 自由职业者社区",
+      href: "http://v2mm.tech"
+    },
+    {
       title: "Leyafo's Blog",
       href: "http://www.leyafo.com"
     },
