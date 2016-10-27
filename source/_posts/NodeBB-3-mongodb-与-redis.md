@@ -101,10 +101,13 @@ module.exports = db;
 
 再举个例子，我在做  [nodebb-plugin-sso-github2] 的时候，用到的数据库有 hash 类型的 `githubid:uid` 和 sorted set 类型的 `email:uid`， 各自保存了 github 和 user ，email 和 user 之间的对应关系。
 
+此前我在创建 category 的时候，没注意将 category 的 slug 都设置成了中文，与 category name 同名。在 mongo 下可以这样更改（以我的数据库为例）：
+
+    db.objects.update({_key: "category:10"}, {$set: {slug: "10/technique"}})
+
+
 如你看到此文，还有更多的疑问或不同的见解， 欢迎来到 [v2mm] 上讨论。
 [v2mm] 是我创建的一个自由职业者论坛，欢迎加入 [v2mm],  winter is coming.
-
-
 
 
 
