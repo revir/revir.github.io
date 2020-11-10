@@ -2,7 +2,7 @@
 layout: "about"
 title: "About"
 date: 2016-09-27 19:48:33
-description: "I am River Yang, I am a freelance programmer."
+description: "I am River Young, developer of Dictionariez."
 header-img: "img/about-bg.jpg"
 comments: false
 ---
