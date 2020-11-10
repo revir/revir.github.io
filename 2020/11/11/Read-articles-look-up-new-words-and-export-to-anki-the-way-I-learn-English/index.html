@@ -13,11 +13,11 @@
 
     <title>
         
-          NodeBB 3: mongodb 与 redis - River的博客 | River&#39;s Blog
+          Read articles, look up new words and export to anki, the way I learn English - River的博客 | River&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://revir.github.io/2016/10/27/NodeBB-3-mongodb-与-redis/">
+    <link rel="canonical" href="https://revir.github.io/2020/11/11/Read-articles-look-up-new-words-and-export-to-anki-the-way-I-learn-English/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -158,20 +158,18 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+                          <a class="tag" href="/tags/#learning-language" title="learning-language">learning-language</a>
                         
-                          <a class="tag" href="/tags/#NodeBB" title="NodeBB">NodeBB</a>
+                          <a class="tag" href="/tags/#learning-english" title="learning-english">learning-english</a>
                         
-                          <a class="tag" href="/tags/#V2MM" title="V2MM">V2MM</a>
-                        
-                          <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                          <a class="tag" href="/tags/#Dictionariez" title="Dictionariez">Dictionariez</a>
                         
                     </div>
-                    <h1>NodeBB 3: mongodb 与 redis</h1>
+                    <h1>Read articles, look up new words and export to anki, the way I learn English</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by River Young on
-                        2016-10-27
+                        2020-11-11
                     </span>
                 </div>
             </div>
@@ -190,23 +188,14 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>前面说过，<a href="http://nodebb.org" target="_blank" rel="noopener">NodeBB</a> 支持 mongodb 或 redis 作为存储数据库。这种使用 NoSQL 数据库的做法我很欣赏，有时候写插件要给数据库添加某个字段的时候非常方便，直接加就行。比如给 Topic 添加一个 externalLink 属性。</p>
-<p>其实 <a href="http://nodebb.org" target="_blank" rel="noopener">NodeBB</a> 刚开始 0.x 版的时候还只支持 Redis, 所以它的数据存储格式就这几种： hashes, sets, sortedsets and lists。后来经过某个版本的 Merge 后，依靠社区的力量终于支持 Mongodb 了， 有牛人用 Mongodb 来实现了  hashes, sets, sortedsets and list 这几种特殊的格式。 以至于现在 <a href="http://nodebb.org" target="_blank" rel="noopener">NodeBB</a> 在数据库层的接口完全是一致的, Views 和 Controller 调用存储的时候完全不用管是 Redis 还是 Mongodb.</p>
-<p>这是如何实现的呢？</p>
-<p>查看源代码可以看到，在 <code>src/databases</code> 下有 mongo 和 redis 对于 hash, list, sets 和 sorted set 的各自实现，上层调用时使用它们统一抽象的接口名。比如 <code>setObject</code>，它们在 mongo 和 redis 下的实现是这样的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// from redis/hash.js</span></span><br><span class="line"><span class="built_in">module</span>.setObject = <span class="function"><span class="keyword">function</span>(<span class="params">key, data, callback</span>) </span>&#123;</span><br><span class="line">        callback = callback || <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">        redisClient.hmset(key, data, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">            callback(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// from mongo/hash.js</span></span><br><span class="line"><span class="built_in">module</span>.setObject = <span class="function"><span class="keyword">function</span>(<span class="params">key, data, callback</span>) </span>&#123;</span><br><span class="line">        callback = callback || helpers.noop;</span><br><span class="line">        <span class="keyword">if</span> (!key) &#123;</span><br><span class="line">            <span class="keyword">return</span> callback();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        db.collection(<span class="string">'objects'</span>).update(&#123;<span class="attr">_key</span>: key&#125;, &#123;<span class="attr">$set</span>: data&#125;, &#123;<span class="attr">upsert</span>: <span class="literal">true</span>, <span class="attr">w</span>: <span class="number">1</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">            callback(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-<p>上层调用数据库的时候无需区分使用哪个 db：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> db = <span class="built_in">require</span>(<span class="string">'./database'</span>);</span><br><span class="line"></span><br><span class="line">db.setObject(<span class="string">'user:'</span> + uid, userData);</span><br></pre></td></tr></table></figure>
-<p><a href="http://nodebb.org" target="_blank" rel="noopener">NodeBB</a> 其实就是这样简单粗暴地检测调用哪个数据库的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var nconf = require(&apos;nconf&apos;),</span><br><span class="line">    databaseType = nconf.get(&apos;database&apos;),</span><br><span class="line">    winston = require(&apos;winston&apos;);</span><br><span class="line"></span><br><span class="line">if(!databaseType) &#123;</span><br><span class="line">    winston.info(&apos;Database type not set! Run node app --setup&apos;);</span><br><span class="line">    process.exit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var db = require(&apos;./database/&apos; + databaseType);</span><br><span class="line"></span><br><span class="line">module.exports = db;</span><br></pre></td></tr></table></figure>
-<p>这样做对于 mongodb 的后果就是整个数据库看上去只有一张表叫 objects（除了服务器 session 和 search 索引用到了其他表），并通过 _key 来区分不同数据分类。<br>比如，这样查询某个用户表的信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.objects.find(&#123;_key:&quot;user:100&quot;&#125;).pretty()</span><br><span class="line">&#123;</span><br><span class="line">        &quot;_id&quot; : ObjectId(&quot;555b9afa65190fe2123df8de&quot;),</span><br><span class="line">        &quot;_key&quot; : &quot;user:100&quot;,</span><br><span class="line">        &quot;username&quot; : &quot;KwVLmsBU&quot;,</span><br><span class="line">        &quot;userslug&quot; : &quot;kwvlmsbu&quot;,</span><br><span class="line">        &quot;email&quot; : &quot;KwVLmsBU@nodebb.org&quot;,</span><br><span class="line">        &quot;joindate&quot; : 1432066810034,</span><br><span class="line">        &quot;picture&quot; : &quot;https://secure.gravatar.com/avatar/8e43da62c77de95de0a91b306fb9d658?size=128&amp;default=identicon&amp;rating=pg&quot;,</span><br><span class="line">        &quot;gravatarpicture&quot; : &quot;https://secure.gravatar.com/avatar/8e43da62c77de95de0a91b306fb9d658?size=128&amp;default=identicon&amp;rating=pg&quot;,</span><br><span class="line">        &quot;fullname&quot; : &quot;&quot;,</span><br><span class="line">        &quot;location&quot; : &quot;&quot;,</span><br><span class="line">        &quot;birthday&quot; : &quot;&quot;,</span><br><span class="line">        &quot;website&quot; : &quot;&quot;,</span><br><span class="line">        &quot;signature&quot; : &quot;&quot;,</span><br><span class="line">        &quot;uploadedpicture&quot; : &quot;&quot;,</span><br><span class="line">        &quot;profileviews&quot; : 0,</span><br><span class="line">        &quot;reputation&quot; : 0,</span><br><span class="line">        &quot;postcount&quot; : 0,</span><br><span class="line">        &quot;topiccount&quot; : 0,</span><br><span class="line">        &quot;lastposttime&quot; : 0,</span><br><span class="line">        &quot;banned&quot; : 0,</span><br><span class="line">        &quot;status&quot; : &quot;online&quot;,</span><br><span class="line">        &quot;uid&quot; : 100</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是官网的例子，详请见 <a href="https://github.com/NodeBB/NodeBB/wiki/Database-Structure" target="_blank" rel="noopener">NodeBB database structure</a>.</p>
-<p><a href="http://nodebb.org" target="_blank" rel="noopener">NodeBB</a> 将很多需要统计或排序的字段存储在 sorted set 中，一般使用 value 表示排序的字段名，score 表示统计数字。<br>比如 <code>users:postcount</code> 就是一个 sorted set, 其中存储了每个用户对应的 post count, 其中 value 表示 uid, score 表示 post count. 如果你熟悉 redis 的话，应该知道这是什么意思。</p>
-<p>再举个例子，我在做  <a href="https://github.com/revir/nodebb-plugin-sso-github2" target="_blank" rel="noopener">nodebb-plugin-sso-github2</a> 的时候，用到的数据库有 hash 类型的 <code>githubid:uid</code> 和 sorted set 类型的 <code>email:uid</code>， 各自保存了 github 和 user ，email 和 user 之间的对应关系。</p>
-<p>此前我在创建 category 的时候，没注意将 category 的 slug 都设置成了中文，与 category name 同名。在 mongo 下可以这样更改（以我的数据库为例）：</p>
-<pre><code>db.objects.update({_key: &quot;category:10&quot;}, {$set: {slug: &quot;10/technique&quot;}})
-</code></pre><p>如你看到此文，还有更多的疑问或不同的见解， 欢迎来到 <a href="http://v2mm.tech" target="_blank" rel="noopener">v2mm</a> 上讨论。<br><a href="http://v2mm.tech" target="_blank" rel="noopener">v2mm</a> 是我创建的一个自由职业者论坛，欢迎加入 <a href="http://v2mm.tech" target="_blank" rel="noopener">v2mm</a>,  winter is coming.</p>
+                <p><img src="https://github.com/pnlpal/dictionaries/raw/master/readme_images/optimized.gif" alt="Dictionariez gif"></p>
+<p>So I have been working on this open-source project <a href="https://github.com/pnlpal/dictionaries" target="_blank" rel="noopener">Dictionariez</a> for quite a while now. I would like to share with you that how it facilitates my language learning process.</p>
+<p>I love reading news. Whenever I meet a new word, just click on the word, the definition of it shows up right there under the word. This is the fastest way to look up. In this case the app has builtin dictionaries to support English, Chinese, Japanese, Korean (aka CJK), German, Spanish, French, Italian and Tajik languages, I am happy to add more languages support if you are interested.</p>
+<p>The simplest way to look up a new word, and in this way you don’t have to interrupt your reading flow. But if you do need to look more thoroughly on this word, you can just click on the app’s icon or use the context menu, a popup window will shows to let you look up any words in tons of your favorite dictionaries. This way you can look more deeply on the words. And it just looks like a traditional dictionary app. It has a lot of dictionaries including Urban dictionary, Oxford, Cambridge, Longman, Thesaurus, Merrian webster, Collins and Wikipedia etc.</p>
+<p>Then after reading the article, you will get a list of your lookup history. All the words are there, even with the sentence as their context information. The context is very important. It’s the key information when you export them to Anki, which is a significant tool to help your memorize all these words.</p>
+<p>When you export the words to anki, it will help you do a lot of tedious job, it will grab the images of the words, fill the front and back fields. I think it’s a really good way to use anki.</p>
+<p>This is the project link: <a href="https://github.com/pnlpal/dictionaries" target="_blank" rel="noopener">Dictionariez</a>, you will find the download links for Chrome and Firefox there.</p>
+<p>Guys, I am desperately looking forward to your feedback. To make it better, and benefit others like you and me.</p>
 
 
                 <hr>
@@ -215,13 +204,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/11/11/Read-articles-look-up-new-words-and-export-to-anki-the-way-I-learn-English/" data-toggle="tooltip" data-placement="top" title="Read articles, look up new words and export to anki, the way I learn English">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/10/27/NodeBB-2-定制主题/" data-toggle="tooltip" data-placement="top" title="NodeBB 2: 定制主题">Next Post &rarr;</a>
+                            <a href="/2016/10/27/NodeBB-3-mongodb-与-redis/" data-toggle="tooltip" data-placement="top" title="NodeBB 3: mongodb 与 redis">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -278,8 +263,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "riverrun";
-    var disqus_identifier = "https://revir.github.io/2016/10/27/NodeBB-3-mongodb-与-redis/";
-    var disqus_url = "https://revir.github.io/2016/10/27/NodeBB-3-mongodb-与-redis/";
+    var disqus_identifier = "https://revir.github.io/2020/11/11/Read-articles-look-up-new-words-and-export-to-anki-the-way-I-learn-English/";
+    var disqus_url = "https://revir.github.io/2020/11/11/Read-articles-look-up-new-words-and-export-to-anki-the-way-I-learn-English/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
