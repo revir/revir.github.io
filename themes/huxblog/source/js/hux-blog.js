@@ -28,8 +28,8 @@ $(document).ready(function() {
 
 // responsive embed videos
 $(document).ready(function () { 
-    $('iframe[src*="youtube.com"]').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
-	$('iframe[src*="youtube.com"]').addClass('embed-responsive-item');
+    $('iframe[src^="https://www.youtube.com"]').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
+	$('iframe[src^="https://www.youtube.com"]').addClass('embed-responsive-item');
     $('iframe[src*="vimeo.com"]').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
 	$('iframe[src*="vimeo.com"]').addClass('embed-responsive-item');
 });
