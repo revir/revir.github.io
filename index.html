@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -185,9 +185,10 @@
             
         </h3>
         <div class="post-content-preview">
-            What a sunny day here! Today when I got up my Gmail and Twitter both notified me that I have got a donation. And it’s not just a cup of coffee. It turns out to be a whole bunch of coffees.
-
-That’s ......
+            
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('iframe').onload = function() {
+        this.style.height=this.offsetWidth > 768 ? (this.offsetWidth/2.67) +"px" : ......
         </div>
     </a>
     <p class="post-meta">
