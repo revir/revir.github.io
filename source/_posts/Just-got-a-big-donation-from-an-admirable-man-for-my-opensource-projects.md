@@ -6,6 +6,14 @@ tags:
     - open-source
 ---
 
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('iframe').onload = function() {
+        this.style.height=this.offsetWidth > 768 ? (this.offsetWidth/2.67) +"px" : (this.offsetWidth/(16/9)+180)+"px";
+    }
+});
+</script>
+
 What a sunny day here! Today when I got up my Gmail and [Twitter](https://twitter.com/drchuck/status/1350895184117178369) both notified me that I have got a donation. And it's not just a cup of coffee. It turns out to be a whole bunch of coffees.
 
 ![screenshot](https://i.imgur.com/Frvt1lS.png)
@@ -18,7 +26,9 @@ I found out that He is someone really dedicated to educational purpose.
 He is working on the open-source project of [Sakai Collaboration and Learning Environment](https://github.com/sakaiproject).    
 He has been teaching online since a long time ago and do it for free!  
 
-<iframe src='https://pnlpal.dev/captionz-ii/?link=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DfvhNadKjE8g%26list%3DPLlRFEj9H3Oj7Bp8-DfGpfAfDBiblRfl5p%26ab_channel%3DChuckSeverance' width='100%' frameborder='0' onload='this.style.height=this.offsetWidth > 768 ? (this.offsetWidth/2.67) +"px" : (this.offsetWidth/(16/9)+180)+"px";' allowfullscreen></iframe>
+
+<iframe src='https://pnlpal.dev/captionz-ii/?link=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DfvhNadKjE8g%26list%3DPLlRFEj9H3Oj7Bp8-DfGpfAfDBiblRfl5p%26ab_channel%3DChuckSeverance' width='100%' frameborder='0' allowfullscreen></iframe>
+
 
 How cool he is! 
 
