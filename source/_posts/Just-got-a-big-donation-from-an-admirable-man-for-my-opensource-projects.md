@@ -19,9 +19,9 @@ What a sunny day here! Today when I got up my Gmail and [Twitter](https://twitte
 ![screenshot](https://i.imgur.com/Frvt1lS.png)
 
 That's really huge to me. Not just for the amount of money, but also for someone's appreciation, especially from a man who is so influential and admirable in the open-source society.   
-I don't really know him, in fact I just googled him when I saw this.
+I don't really know him, in fact I just googled him when I saw this. (I am a totally newbie in the modern world.)
 
-I found out that He is someone really dedicated to educational purpose.   
+I found out that [He is someone really dedicated to educational purpose](https://www.dr-chuck.com).   
 
 He is working on the open-source project of [Sakai Collaboration and Learning Environment](https://github.com/sakaiproject).    
 He has been teaching online since a long time ago and do it for free!  
