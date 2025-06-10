@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just a boy having fun">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          NodeBB 1: 一个现代化的论坛 - River的博客 | River&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://revir.github.io/2016/10/20/NodeBB-1-一个现代化的论坛/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">River&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://revir.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+                        
+                          <a class="tag" href="/tags/#NodeBB" title="NodeBB">NodeBB</a>
+                        
+                          <a class="tag" href="/tags/#V2MM" title="V2MM">V2MM</a>
+                        
+                    </div>
+                    <h1>NodeBB 1: 一个现代化的论坛</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by River Young on
+                        2016-10-20
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="NodeBB：一个现代化的论坛"><a href="#NodeBB：一个现代化的论坛" class="headerlink" title="NodeBB：一个现代化的论坛"></a>NodeBB：一个现代化的论坛</h2><p>最近对论坛感兴趣，准备学习一下，网上的开源论坛无数，为什么选择 <a href="http://nodebb.org/">NodeBB</a> 呢？ 因为被它神速的单页面设计惊艳到了，它有完善的功能模块，可以用作 CMS，博客，论坛，甚至电子商务网站；它使用了 websocket 实时通信，可以让用户分组建群聊天；它的模块化设计，从主题到功能插件均可以自定义，支持 theme, widget, plugin 三种形式的扩展，社区已经有了很多功能强大的扩展； 它有比较完善的 wiki 和颇受欢迎的社区关注度， 从它开始着手学习再适合不过了。</p>
+<ul>
+<li><a href="https://github.com/NodeBB/NodeBB">github</a></li>
+<li><a href="https://docs.nodebb.org/en/latest/">文档</a></li>
+<li><a href="http://v2mm.tech/">demo</a></li>
+</ul>
+<p>贴张图感受一下：<br><a href="http://v2mm.tech/"><img src="https://github.com/revir/nodebb-theme-v2mm/raw/master/screenshot.png" alt="NodeBB demo"></a></p>
+<h2 id="环境和依赖"><a href="#环境和依赖" class="headerlink" title="环境和依赖"></a>环境和依赖</h2><p><a href="http://nodebb.org/">NodeBB</a> 是用 Node.js 开发的，显然需要 Node 环境，推荐使用 nvm 安装 node， 官网有详细<a href="https://docs.nodebb.org/en/latest/">文档</a>。<br><a href="http://nodebb.org/">NodeBB</a> 同时支持 Redis 或 MongodDB 作为数据库。不同于某些网络应用仅使用 Redis 作缓存， NodeBB 是将数据全部存储在 Redis 里的，如果你的服务器内存够大，推荐使用 Redis。 当然如果你像我一样只是购买的一个最低配置的 VPS, 那还是推荐 mongodb. <code>./nodebb setup</code> 可以选择。</p>
+<h2 id="安装和启动"><a href="#安装和启动" class="headerlink" title="安装和启动"></a>安装和启动</h2><p><a href="http://nodebb.org/">NodeBB</a> 的安装和启动方式见<a href="https://docs.nodebb.org/en/latest/">文档</a>，也可以用 node-inspector 调试，见详细的<a href="https://docs.nodebb.org/en/latest/resources.html#debugging">调试教程</a>。这货的安装使用 npm install 一下就搞定了， 然后使用  <code>./nodebb setup</code>  或直接更改 config 文件配置自己的 database， 不要太简单。<br>本地调试就用 <code>./nodebb dev</code> 启动， 这样可以只启动一个实例，并且有调试日志。</p>
+<p><a href="http://nodebb.org/">NodeBB</a> 默认运行在 4567 端口上， 如果要监听 80 端口， 推荐使用 Nginx 作反向代理， 见<a href="https://docs.nodebb.org/en/latest/configuring/proxies/nginx.html">教程:  Nginx作代理</a>. 或者在防火墙上设置转发规则，如 iptables:</p>
+<pre><code>sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 4567
+</code></pre>
+<h2 id="编写一个插件"><a href="#编写一个插件" class="headerlink" title="编写一个插件"></a>编写一个插件</h2><p><a href="http://nodebb.org/">NodeBB</a> 的插件都是通过一个个的 <a href="https://github.com/NodeBB/NodeBB/wiki/Hooks">HOOKS</a> 运行的，通过 <a href="https://docs.nodebb.org/en/latest/admin/index.html">ACP</a> 的 plugins 管理页面安装几个插件，插件其实就安装在 node_modules 目录下，看看其他插件的写法，其实很简单，开始着手写一个。<br>首先在 node_modules 下创建一个目录， 然后再创建一个 plugin.json,  其中定义插件需要的 templates, static resources 等等，关键是 <a href="https://github.com/NodeBB/NodeBB/wiki/Hooks">HOOKS</a> 指定钩子。比如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">&#123; &quot;hook&quot;: &quot;static:app.load&quot;, &quot;method&quot;: &quot;init&quot; &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>这样在 plugin.json 中指定的 library.js 里的 init 函数就可以在程序启动的时候运行你的插件初始化函数了。<br>目前我的插件还在构思开发中，开发完成后必定开源……<br>HOOKS 的函数有多种，包括 filters, actions 和 static, 各司其职，务必阅读<a href="https://docs.nodebb.org/en/latest/plugins/create.html">插件开发指南</a>, 可恨的是每个函数接口并没有清晰的定义，只能直接读源代码， 通过上下文来判断。<br>如果你也有兴趣开发，我们一同进步吧！</p>
+<h2 id="自由职业者社区-V2MM"><a href="#自由职业者社区-V2MM" class="headerlink" title="自由职业者社区: V2MM"></a>自由职业者社区: V2MM</h2><p>需要学习更多的 NodeBB 开发知识，欢迎加入 <a href="http://v2mm.tech/">v2mm</a>。<a href="http://v2mm.tech/">v2mm</a> 是我基于 NodeBB 搭建的一个自由职业者社区，旨在提供给追求自由的 Geek 们一个自由讨论，互相学习与分享的地方。<a href="http://v2mm.tech/">v2mm</a> 的成长离不开 <a href="http://nodebb.org/">NodeBB</a> 社区的贡献，因此 v2mm 制作的主题和插件都将开源，欢迎加入我们！</p>
+<p>无论你是程序猿，还是设计狮，抑或是产品经理，<br>如果你做的是自由职业，<br>每天睡到自然醒，代码撸到凌晨一两点，<br>或者你只是在远程办公，<br>一台电脑就是你叱诧风云的利器，<br>你只需要有一颗追求自由的心，<br>那么我们就是自由职业者！</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/10/27/NodeBB-2-定制主题/" data-toggle="tooltip" data-placement="top" title="NodeBB 2: 定制主题">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/10/02/维修冷热水龙头/" data-toggle="tooltip" data-placement="top" title="维修冷热水龙头">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://pnl.dev" target="_blank">PNL: programming and language community</a></li>
+                    
+                        <li><a href="https://github.com/pnlpal/dictionaries" target="_blank">Dictionariez: one to rule them all</a></li>
+                    
+                        <li><a href="https://www.leyafo.com" target="_blank">Leyafo&#39;s Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "riverrun";
+    var disqus_identifier = "https://revir.github.io/2016/10/20/NodeBB-1-%E4%B8%80%E4%B8%AA%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E8%AE%BA%E5%9D%9B/";
+    var disqus_url = "https://revir.github.io/2016/10/20/NodeBB-1-%E4%B8%80%E4%B8%AA%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84%E8%AE%BA%E5%9D%9B/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:https://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          placement: 'right'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/pnlpal">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pnlpal">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; River&#39;s Blog 2025 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://revir.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="https://revir.github.io/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

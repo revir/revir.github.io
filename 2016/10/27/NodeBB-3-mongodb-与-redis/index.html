@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just a boy having fun">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          NodeBB 3: mongodb 与 redis - River的博客 | River&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://revir.github.io/2016/10/27/NodeBB-3-mongodb-与-redis/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">River&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://revir.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+                        
+                          <a class="tag" href="/tags/#NodeBB" title="NodeBB">NodeBB</a>
+                        
+                          <a class="tag" href="/tags/#V2MM" title="V2MM">V2MM</a>
+                        
+                          <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                        
+                    </div>
+                    <h1>NodeBB 3: mongodb 与 redis</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by River Young on
+                        2016-10-27
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>前面说过，<a href="http://nodebb.org/">NodeBB</a> 支持 mongodb 或 redis 作为存储数据库。这种使用 NoSQL 数据库的做法我很欣赏，有时候写插件要给数据库添加某个字段的时候非常方便，直接加就行。比如给 Topic 添加一个 externalLink 属性。</p>
+<p>其实 <a href="http://nodebb.org/">NodeBB</a> 刚开始 0.x 版的时候还只支持 Redis, 所以它的数据存储格式就这几种： hashes, sets, sortedsets and lists。后来经过某个版本的 Merge 后，依靠社区的力量终于支持 Mongodb 了， 有牛人用 Mongodb 来实现了  hashes, sets, sortedsets and list 这几种特殊的格式。 以至于现在 <a href="http://nodebb.org/">NodeBB</a> 在数据库层的接口完全是一致的, Views 和 Controller 调用存储的时候完全不用管是 Redis 还是 Mongodb.</p>
+<p>这是如何实现的呢？</p>
+<p>查看源代码可以看到，在 <code>src/databases</code> 下有 mongo 和 redis 对于 hash, list, sets 和 sorted set 的各自实现，上层调用时使用它们统一抽象的接口名。比如 <code>setObject</code>，它们在 mongo 和 redis 下的实现是这样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// from redis/hash.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">setObject</span> = <span class="keyword">function</span>(<span class="params">key, data, callback</span>) &#123;</span><br><span class="line">        callback = callback || <span class="keyword">function</span>(<span class="params"></span>) &#123;&#125;;</span><br><span class="line">        redisClient.<span class="title function_">hmset</span>(key, data, <span class="keyword">function</span>(<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">callback</span>(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// from mongo/hash.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">setObject</span> = <span class="keyword">function</span>(<span class="params">key, data, callback</span>) &#123;</span><br><span class="line">        callback = callback || helpers.<span class="property">noop</span>;</span><br><span class="line">        <span class="keyword">if</span> (!key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title function_">callback</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        db.<span class="title function_">collection</span>(<span class="string">&#x27;objects&#x27;</span>).<span class="title function_">update</span>(&#123;<span class="attr">_key</span>: key&#125;, &#123;<span class="attr">$set</span>: data&#125;, &#123;<span class="attr">upsert</span>: <span class="literal">true</span>, <span class="attr">w</span>: <span class="number">1</span>&#125;, <span class="keyword">function</span>(<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">callback</span>(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上层调用数据库的时候无需区分使用哪个 db：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> db = <span class="built_in">require</span>(<span class="string">&#x27;./database&#x27;</span>);</span><br><span class="line"></span><br><span class="line">db.<span class="title function_">setObject</span>(<span class="string">&#x27;user:&#x27;</span> + uid, userData);</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://nodebb.org/">NodeBB</a> 其实就是这样简单粗暴地检测调用哪个数据库的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var nconf = require(&#x27;nconf&#x27;),</span><br><span class="line">    databaseType = nconf.get(&#x27;database&#x27;),</span><br><span class="line">    winston = require(&#x27;winston&#x27;);</span><br><span class="line"></span><br><span class="line">if(!databaseType) &#123;</span><br><span class="line">    winston.info(&#x27;Database type not set! Run node app --setup&#x27;);</span><br><span class="line">    process.exit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var db = require(&#x27;./database/&#x27; + databaseType);</span><br><span class="line"></span><br><span class="line">module.exports = db;</span><br></pre></td></tr></table></figure>
+
+<p>这样做对于 mongodb 的后果就是整个数据库看上去只有一张表叫 objects（除了服务器 session 和 search 索引用到了其他表），并通过 _key 来区分不同数据分类。<br>比如，这样查询某个用户表的信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.objects.find(&#123;_key:&quot;user:100&quot;&#125;).pretty()</span><br><span class="line">&#123;</span><br><span class="line">        &quot;_id&quot; : ObjectId(&quot;555b9afa65190fe2123df8de&quot;),</span><br><span class="line">        &quot;_key&quot; : &quot;user:100&quot;,</span><br><span class="line">        &quot;username&quot; : &quot;KwVLmsBU&quot;,</span><br><span class="line">        &quot;userslug&quot; : &quot;kwvlmsbu&quot;,</span><br><span class="line">        &quot;email&quot; : &quot;KwVLmsBU@nodebb.org&quot;,</span><br><span class="line">        &quot;joindate&quot; : 1432066810034,</span><br><span class="line">        &quot;picture&quot; : &quot;https://secure.gravatar.com/avatar/8e43da62c77de95de0a91b306fb9d658?size=128&amp;default=identicon&amp;rating=pg&quot;,</span><br><span class="line">        &quot;gravatarpicture&quot; : &quot;https://secure.gravatar.com/avatar/8e43da62c77de95de0a91b306fb9d658?size=128&amp;default=identicon&amp;rating=pg&quot;,</span><br><span class="line">        &quot;fullname&quot; : &quot;&quot;,</span><br><span class="line">        &quot;location&quot; : &quot;&quot;,</span><br><span class="line">        &quot;birthday&quot; : &quot;&quot;,</span><br><span class="line">        &quot;website&quot; : &quot;&quot;,</span><br><span class="line">        &quot;signature&quot; : &quot;&quot;,</span><br><span class="line">        &quot;uploadedpicture&quot; : &quot;&quot;,</span><br><span class="line">        &quot;profileviews&quot; : 0,</span><br><span class="line">        &quot;reputation&quot; : 0,</span><br><span class="line">        &quot;postcount&quot; : 0,</span><br><span class="line">        &quot;topiccount&quot; : 0,</span><br><span class="line">        &quot;lastposttime&quot; : 0,</span><br><span class="line">        &quot;banned&quot; : 0,</span><br><span class="line">        &quot;status&quot; : &quot;online&quot;,</span><br><span class="line">        &quot;uid&quot; : 100</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是官网的例子，详请见 <a href="https://github.com/NodeBB/NodeBB/wiki/Database-Structure">NodeBB database structure</a>.</p>
+<p><a href="http://nodebb.org/">NodeBB</a> 将很多需要统计或排序的字段存储在 sorted set 中，一般使用 value 表示排序的字段名，score 表示统计数字。<br>比如 <code>users:postcount</code> 就是一个 sorted set, 其中存储了每个用户对应的 post count, 其中 value 表示 uid, score 表示 post count. 如果你熟悉 redis 的话，应该知道这是什么意思。</p>
+<p>再举个例子，我在做  <a href="https://github.com/revir/nodebb-plugin-sso-github2">nodebb-plugin-sso-github2</a> 的时候，用到的数据库有 hash 类型的 <code>githubid:uid</code> 和 sorted set 类型的 <code>email:uid</code>， 各自保存了 github 和 user ，email 和 user 之间的对应关系。</p>
+<p>此前我在创建 category 的时候，没注意将 category 的 slug 都设置成了中文，与 category name 同名。在 mongo 下可以这样更改（以我的数据库为例）：</p>
+<pre><code>db.objects.update(&#123;_key: &quot;category:10&quot;&#125;, &#123;$set: &#123;slug: &quot;10/technique&quot;&#125;&#125;)
+</code></pre>
+<p>如你看到此文，还有更多的疑问或不同的见解， 欢迎来到 <a href="http://v2mm.tech/">v2mm</a> 上讨论。<br><a href="http://v2mm.tech/">v2mm</a> 是我创建的一个自由职业者论坛，欢迎加入 <a href="http://v2mm.tech/">v2mm</a>,  winter is coming.</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/11/11/Read-articles-look-up-new-words-and-export-to-anki-the-way-I-learn-English/" data-toggle="tooltip" data-placement="top" title="Read articles, look up new words and export to anki, the way I learn English">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/10/27/NodeBB-2-定制主题/" data-toggle="tooltip" data-placement="top" title="NodeBB 2: 定制主题">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://pnl.dev" target="_blank">PNL: programming and language community</a></li>
+                    
+                        <li><a href="https://github.com/pnlpal/dictionaries" target="_blank">Dictionariez: one to rule them all</a></li>
+                    
+                        <li><a href="https://www.leyafo.com" target="_blank">Leyafo&#39;s Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "riverrun";
+    var disqus_identifier = "https://revir.github.io/2016/10/27/NodeBB-3-mongodb-%E4%B8%8E-redis/";
+    var disqus_url = "https://revir.github.io/2016/10/27/NodeBB-3-mongodb-%E4%B8%8E-redis/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:https://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          placement: 'right'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/pnlpal">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pnlpal">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; River&#39;s Blog 2025 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://revir.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="https://revir.github.io/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

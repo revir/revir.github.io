@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Just a boy having fun">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          About - River的博客 | River&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://revir.github.io/about/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
+
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">River&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>About</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">I am River Young, developer of Dictionariez.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+
+                <blockquote>
+<p>All they got to rule the nation, all I got is just precious time.</p>
+</blockquote>
+<p>几年前刚工作的时候， 工资低， 在魔都这个地方生活不易， 便在下班之后的空余时间找一些兼职项目做， 记得第一个是做阅读器的项目，是在 v2ex 上找的，辛苦了两个月，赚了一些外快， 可惜项目最终还是没有上线。两个月之后萌生了做自由职业者的想法， 向往那种自由自在的工作和生活。但是想归想， 技术上还是没有自信。v2ex 外包板块上的大部分项目都没有谱能够实现。几经踟蹰又在公司里混了几年，待到我从一个 windows 下 C++ 程序员，过渡到 Python,  JS 为主的 web 程序员，开发的平台从 Windows 到 Mac、Linux 都熟悉了，写过客户端，设计过网站，做过服务器 API, 研究过数据库，于是乎终于下定决心， 我不干了， 我要辞职， 我要做一个自由职业者！<br><img src="/img/about/FC59A967C29EA05F7D42853224DEF291.jpeg" alt="Alt text"></p>
+<p>春去秋来，转眼已经快五个月了。我已经从魔都搬到了武汉，一个千湖之城。<br><img src="/img/about/104294359.jpg" alt="Alt text"></p>
+<p>这些年大大小小的项目已经做了很多了，在公司上班的时候，大多与同事合作一些项目，空余时间也做了一些开源的小工具。今年五月份辞职以后， 接了几个小单， 都完成得还不错。下面介绍一些做过的项目，有些是我单独完成的，有些是团队协作开发的。</p>
+<h3 id="CV-Hunting"><a href="#CV-Hunting" class="headerlink" title="CV Hunting"></a>CV Hunting</h3><ul>
+<li><a href="http://www.cvhunting.com/">官网</a> 和 <a href="https://chrome.google.com/webstore/detail/cv-hunting/onjhjfmflpenlonkkipmnknbeikecoee">chrome webstore</a></li>
+</ul>
+<p>这是一个帮助猎头朋友们备份和获取 Linkedin 上的联系人信息的软件，免费， 无需注册，开箱即用。 软件前端基于 chrome extension 开发，支持各大 chromium 内核的浏览器。前端使用了 angular 框架， 后端基于 Python 的 Flask 框架。<br><img src="/img/about/ss.png" alt="Alt text"></p>
+<h3 id="海牛直播"><a href="#海牛直播" class="headerlink" title="海牛直播"></a>海牛直播</h3><ul>
+<li><a href="http://www.51czd.cn/">官网</a></li>
+</ul>
+<p>这个直播平台是和一个朋友合作开发的， 他负责前端，我负责后端服务器。直播部分使用了<a href="http://gotlive.com.cn/">亲加</a>的在线直播库。我搭建好了数据库，做出了一个可以 demo 的平台后， 退出了开发，目前产品还没有正式运营。<br>![Alt text](&#x2F;img&#x2F;about&#x2F;Screenshot from 2016-08-06 22-26-44.png)</p>
+<h3 id="NWjs-shell-builder-for-windows"><a href="#NWjs-shell-builder-for-windows" class="headerlink" title="NWjs shell builder for windows"></a>NWjs shell builder for windows</h3><ul>
+<li><a href="https://github.com/revir/nwjs-shell-builder-for-win">github</a></li>
+</ul>
+<p>这其实是一个 bash 脚本， 使用 <a href="http://nwjs.io/">NW.js</a> 打包一个网站，构建一个 Windows 下的安装包， 按照客户的需求， 还可以添加驱动等其他安装程序。生成的安装包能够运行于 XP， Windows 7 以及 Windows 10 等系统。</p>
+<h3 id="Fairy-Dict"><a href="#Fairy-Dict" class="headerlink" title="Fairy Dict"></a>Fairy Dict</h3><ul>
+<li><a href="github.com/revir/fairydict">github</a></li>
+</ul>
+<p> 一个运行于 chrome extension 的开源词典工具， 可以鼠标取词，快捷键操作，支持多个词典。<br> ![Alt text](&#x2F;img&#x2F;about&#x2F;Screenshot from 2016-09-28 22-47-20.png)</p>
+<h3 id="谷露招聘系统"><a href="#谷露招聘系统" class="headerlink" title="谷露招聘系统"></a>谷露招聘系统</h3><ul>
+<li><a href="http://www.gllue.com/">gllue 官网</a></li>
+</ul>
+<p>我作为 Python 工程师加入谷露，实际上做的全栈的活。深度参与了谷露招聘管理系统,  谷露渠道通，谷露微信等项目的开发。<br><img src="/img/about/09.png" alt="Alt text"></p>
+<h3 id="一览阅读"><a href="#一览阅读" class="headerlink" title="一览阅读"></a>一览阅读</h3><ul>
+<li><a href="https://www.yilan.io/">一览官网</a></li>
+</ul>
+<p>我是团队最早的开发者之一，开发设计了最早的版本， 包括网站前后端。这是一个基于 Angular + Node.js + Mongodb 的项目，也是我参与的第一个大型 web 项目。</p>
+<p><img src="/img/about/devices.png" alt="Alt text"></p>
+<h3 id="网镜互联网取证系统"><a href="#网镜互联网取证系统" class="headerlink" title="网镜互联网取证系统"></a>网镜互联网取证系统</h3><ul>
+<li><a href="http://www.forensix.cn/">官网</a></li>
+</ul>
+<p>这是一个用于互联网取证的 Windows 软件，使用 C++ 开发，我也是最早的开发者之一，之后还建设了它的 web 版，于是我开始从一个传统的 C++ 程序员转型为一个 Web 程序员， 主要武器为 Python, Node.js, Javascript 等。<br><img src="/img/about/webimager_homepage.png" alt="Alt text"></p>
+
+
+                <!-- 如果开启评论功能 -->
+                
+
+            </div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+
+                        
+                            <img style="border-radius: 50%" src="/img/avatar.jpg" />
+                        
+
+                        
+                            <p>Just a boy having fun.</p>
+                        
+
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                                <li>
+                                    <a target="_blank" href="https://twitter.com/pnlpal">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+                            
+
+                            
+
+                            
+
+                            
+                                <li>
+                                    <a target="_blank"  href="https://github.com/pnlpal">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+
+
+                            
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://pnl.dev" target="_blank">PNL: programming and language community</a></li>
+                    
+                        <li><a href="https://github.com/pnlpal/dictionaries" target="_blank">Dictionariez: one to rule them all</a></li>
+                    
+                        <li><a href="https://www.leyafo.com" target="_blank">Leyafo&#39;s Blog</a></li>
+                    
+                </ul>
+                
+            </div>
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/pnlpal">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pnlpal">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; River&#39;s Blog 2025 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://revir.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<!-- <img src="https://revir.github.io/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
