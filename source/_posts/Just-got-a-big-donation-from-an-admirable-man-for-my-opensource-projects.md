@@ -27,7 +27,7 @@ He is working on the open-source project of [Sakai Collaboration and Learning En
 He has been teaching online since a long time ago and do it for free!  
 
 
-<iframe src='https://pnlpal.dev/captionz-ii/?link=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DfvhNadKjE8g%26list%3DPLlRFEj9H3Oj7Bp8-DfGpfAfDBiblRfl5p%26ab_channel%3DChuckSeverance' width='100%' frameborder='0' allowfullscreen></iframe>
+<iframe src='https://pnl.dev/captionz-ii/?link=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DfvhNadKjE8g%26list%3DPLlRFEj9H3Oj7Bp8-DfGpfAfDBiblRfl5p%26ab_channel%3DChuckSeverance' width='100%' frameborder='0' allowfullscreen></iframe>
 
 
 How cool he is! 
@@ -52,4 +52,4 @@ Yes, programming is fun, right?
 
 [Dictionariez]: https://github.com/pnlpal/dictionaries
 [Github]: https://github.com/pnlpal/dictionaries
-[Captionz]: https://pnlpal.dev/captionz
+[Captionz]: https://pnl.dev/captionz

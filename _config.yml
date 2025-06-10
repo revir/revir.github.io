@@ -109,8 +109,8 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-      title: "pnlpal: programming and language pals",
-      href: "https://pnlpal.dev"
+      title: "PNL: programming and language community",
+      href: "https://pnl.dev"
     },
     {
       title: "Dictionariez: one to rule them all",

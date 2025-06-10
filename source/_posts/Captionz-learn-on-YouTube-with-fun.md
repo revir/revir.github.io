@@ -54,7 +54,7 @@ I will talk about Angular more in later articles.
 Thank you.
 
 ---
-Feedback and reviews are desperately needed, add topics on [pnlpal.dev](https://pnlpal.dev/category/3/feedback) or join me on [Telegram](https://t.me/worldlanguagelearner) & [Discord](https://discord.gg/sazRac4kSa), up to you.
+Feedback and reviews are desperately needed, add topics on [pnl.dev](https://pnl.dev/category/3/feedback) or join me on [Telegram](https://t.me/worldlanguagelearner) & [Discord](https://discord.gg/sazRac4kSa), up to you.
 
 ---
 One more thing. Since I am an English learner, could you help me refine my articles? Help me find out any grammar or whatever errors in it. Thank you. 
@@ -62,4 +62,4 @@ One more thing. Since I am an English learner, could you help me refine my artic
 **This is the way**.
 
 [Dictionariez]: https://github.com/pnlpal/dictionaries
-[Captionz]: https://pnlpal.dev/captionz
+[Captionz]: https://pnl.dev/captionz
