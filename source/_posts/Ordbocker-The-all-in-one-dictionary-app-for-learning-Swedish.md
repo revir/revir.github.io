@@ -11,7 +11,7 @@ Hi, I hope you've had a great week of learning languages and coding! As someone 
 
 That’s exactly why I built [Ordböcker]: an all-in-one dictionary app to make Swedish learning easier and less intimidating.
 
-![Marquee Promo.png](https://pnl.dev/assets/uploads/files/1749997402216-marquee-promo.png) 
+![Marquee Promo.png](/img/post/ordbocker/Marquee Promo.png) 
 
 With Ordböcker, you can instantly look up any word on a webpage—just **double-click** it. You’ll get definitions from multiple trusted sources with one click on the icon. **Vocabulary** is the biggest challenge when reading Swedish news—that’s exactly what Ordböcker helps with.
 
@@ -33,7 +33,7 @@ Honestly, Anki is my secret weapon for learning languages. I owe half my Swedish
 
 Swedish verbs change differently, so I also wanted it to find the root form of words—not all dictionary tools can do that. Certainly [Dictionariez] is more focused on English, and don’t really prioritize Swedish. For example, when I look up the word fart, I want the Swedish meaning to show up first in Ordböcker.  
 
-![Ordböcker1.png](https://pnl.dev/assets/uploads/files/1749997381808-ordbo-cker1.png) 
+![Ordböcker1.png](/img/post/ordbocker/Ordböcker1.png) 
 
 If you’re already using Dictionariez and mainly learning Swedish through English, I recommend switching to Ordböcker. It offers most of the same features but prioritizes Swedish over English.
 
