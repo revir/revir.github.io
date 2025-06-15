@@ -15,12 +15,12 @@
   <link rel="shortcut icon" href="/img/favicon.ico" />
 
   <title>
-     NodeBB 3: mongodb 与 redis - River的博客 | River&#39;s Blog 
+     Ordböcker: The all-in-one dictionary app for learning Swedish. - River的博客 | River&#39;s Blog 
   </title>
 
   <link
     rel="canonical"
-    href="https://revir.github.io/2016/10/27/NodeBB-3-mongodb-与-redis/"
+    href="https://revir.github.io/2025/06/15/Ordbocker-The-all-in-one-dictionary-app-for-learning-Swedish/"
   />
 
   <!-- Bootstrap Core CSS -->
@@ -170,20 +170,20 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
+                          <a class="tag" href="/tags/#Open Source Project" title="Open Source Project">Open Source Project</a>
                         
-                          <a class="tag" href="/tags/#NodeBB" title="NodeBB">NodeBB</a>
+                          <a class="tag" href="/tags/#Chrome Extension" title="Chrome Extension">Chrome Extension</a>
                         
-                          <a class="tag" href="/tags/#V2MM" title="V2MM">V2MM</a>
+                          <a class="tag" href="/tags/#Firefox Addon" title="Firefox Addon">Firefox Addon</a>
                         
-                          <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+                          <a class="tag" href="/tags/#Ordböcker" title="Ordböcker">Ordböcker</a>
                         
                     </div>
-                    <h1>NodeBB 3: mongodb 与 redis</h1>
+                    <h1>Ordböcker: The all-in-one dictionary app for learning Swedish.</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by River Young on
-                        2016-10-27
+                        2025-06-15
                     </span>
                 </div>
             </div>
@@ -202,27 +202,29 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>前面说过，<a href="http://nodebb.org/">NodeBB</a> 支持 mongodb 或 redis 作为存储数据库。这种使用 NoSQL 数据库的做法我很欣赏，有时候写插件要给数据库添加某个字段的时候非常方便，直接加就行。比如给 Topic 添加一个 externalLink 属性。</p>
-<p>其实 <a href="http://nodebb.org/">NodeBB</a> 刚开始 0.x 版的时候还只支持 Redis, 所以它的数据存储格式就这几种： hashes, sets, sortedsets and lists。后来经过某个版本的 Merge 后，依靠社区的力量终于支持 Mongodb 了， 有牛人用 Mongodb 来实现了  hashes, sets, sortedsets and list 这几种特殊的格式。 以至于现在 <a href="http://nodebb.org/">NodeBB</a> 在数据库层的接口完全是一致的, Views 和 Controller 调用存储的时候完全不用管是 Redis 还是 Mongodb.</p>
-<p>这是如何实现的呢？</p>
-<p>查看源代码可以看到，在 <code>src/databases</code> 下有 mongo 和 redis 对于 hash, list, sets 和 sorted set 的各自实现，上层调用时使用它们统一抽象的接口名。比如 <code>setObject</code>，它们在 mongo 和 redis 下的实现是这样的：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// from redis/hash.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">setObject</span> = <span class="keyword">function</span>(<span class="params">key, data, callback</span>) &#123;</span><br><span class="line">        callback = callback || <span class="keyword">function</span>(<span class="params"></span>) &#123;&#125;;</span><br><span class="line">        redisClient.<span class="title function_">hmset</span>(key, data, <span class="keyword">function</span>(<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">callback</span>(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// from mongo/hash.js</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">setObject</span> = <span class="keyword">function</span>(<span class="params">key, data, callback</span>) &#123;</span><br><span class="line">        callback = callback || helpers.<span class="property">noop</span>;</span><br><span class="line">        <span class="keyword">if</span> (!key) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="title function_">callback</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        db.<span class="title function_">collection</span>(<span class="string">&#x27;objects&#x27;</span>).<span class="title function_">update</span>(&#123;<span class="attr">_key</span>: key&#125;, &#123;<span class="attr">$set</span>: data&#125;, &#123;<span class="attr">upsert</span>: <span class="literal">true</span>, <span class="attr">w</span>: <span class="number">1</span>&#125;, <span class="keyword">function</span>(<span class="params">err</span>) &#123;</span><br><span class="line">            <span class="title function_">callback</span>(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>上层调用数据库的时候无需区分使用哪个 db：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> db = <span class="built_in">require</span>(<span class="string">&#x27;./database&#x27;</span>);</span><br><span class="line"></span><br><span class="line">db.<span class="title function_">setObject</span>(<span class="string">&#x27;user:&#x27;</span> + uid, userData);</span><br></pre></td></tr></table></figure>
-
-<p><a href="http://nodebb.org/">NodeBB</a> 其实就是这样简单粗暴地检测调用哪个数据库的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var nconf = require(&#x27;nconf&#x27;),</span><br><span class="line">    databaseType = nconf.get(&#x27;database&#x27;),</span><br><span class="line">    winston = require(&#x27;winston&#x27;);</span><br><span class="line"></span><br><span class="line">if(!databaseType) &#123;</span><br><span class="line">    winston.info(&#x27;Database type not set! Run node app --setup&#x27;);</span><br><span class="line">    process.exit();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var db = require(&#x27;./database/&#x27; + databaseType);</span><br><span class="line"></span><br><span class="line">module.exports = db;</span><br></pre></td></tr></table></figure>
-
-<p>这样做对于 mongodb 的后果就是整个数据库看上去只有一张表叫 objects（除了服务器 session 和 search 索引用到了其他表），并通过 _key 来区分不同数据分类。<br>比如，这样查询某个用户表的信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt; db.objects.find(&#123;_key:&quot;user:100&quot;&#125;).pretty()</span><br><span class="line">&#123;</span><br><span class="line">        &quot;_id&quot; : ObjectId(&quot;555b9afa65190fe2123df8de&quot;),</span><br><span class="line">        &quot;_key&quot; : &quot;user:100&quot;,</span><br><span class="line">        &quot;username&quot; : &quot;KwVLmsBU&quot;,</span><br><span class="line">        &quot;userslug&quot; : &quot;kwvlmsbu&quot;,</span><br><span class="line">        &quot;email&quot; : &quot;KwVLmsBU@nodebb.org&quot;,</span><br><span class="line">        &quot;joindate&quot; : 1432066810034,</span><br><span class="line">        &quot;picture&quot; : &quot;https://secure.gravatar.com/avatar/8e43da62c77de95de0a91b306fb9d658?size=128&amp;default=identicon&amp;rating=pg&quot;,</span><br><span class="line">        &quot;gravatarpicture&quot; : &quot;https://secure.gravatar.com/avatar/8e43da62c77de95de0a91b306fb9d658?size=128&amp;default=identicon&amp;rating=pg&quot;,</span><br><span class="line">        &quot;fullname&quot; : &quot;&quot;,</span><br><span class="line">        &quot;location&quot; : &quot;&quot;,</span><br><span class="line">        &quot;birthday&quot; : &quot;&quot;,</span><br><span class="line">        &quot;website&quot; : &quot;&quot;,</span><br><span class="line">        &quot;signature&quot; : &quot;&quot;,</span><br><span class="line">        &quot;uploadedpicture&quot; : &quot;&quot;,</span><br><span class="line">        &quot;profileviews&quot; : 0,</span><br><span class="line">        &quot;reputation&quot; : 0,</span><br><span class="line">        &quot;postcount&quot; : 0,</span><br><span class="line">        &quot;topiccount&quot; : 0,</span><br><span class="line">        &quot;lastposttime&quot; : 0,</span><br><span class="line">        &quot;banned&quot; : 0,</span><br><span class="line">        &quot;status&quot; : &quot;online&quot;,</span><br><span class="line">        &quot;uid&quot; : 100</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是官网的例子，详请见 <a href="https://github.com/NodeBB/NodeBB/wiki/Database-Structure">NodeBB database structure</a>.</p>
-<p><a href="http://nodebb.org/">NodeBB</a> 将很多需要统计或排序的字段存储在 sorted set 中，一般使用 value 表示排序的字段名，score 表示统计数字。<br>比如 <code>users:postcount</code> 就是一个 sorted set, 其中存储了每个用户对应的 post count, 其中 value 表示 uid, score 表示 post count. 如果你熟悉 redis 的话，应该知道这是什么意思。</p>
-<p>再举个例子，我在做  <a href="https://github.com/revir/nodebb-plugin-sso-github2">nodebb-plugin-sso-github2</a> 的时候，用到的数据库有 hash 类型的 <code>githubid:uid</code> 和 sorted set 类型的 <code>email:uid</code>， 各自保存了 github 和 user ，email 和 user 之间的对应关系。</p>
-<p>此前我在创建 category 的时候，没注意将 category 的 slug 都设置成了中文，与 category name 同名。在 mongo 下可以这样更改（以我的数据库为例）：</p>
-<pre><code>db.objects.update(&#123;_key: &quot;category:10&quot;&#125;, &#123;$set: &#123;slug: &quot;10/technique&quot;&#125;&#125;)
-</code></pre>
-<p>如你看到此文，还有更多的疑问或不同的见解， 欢迎来到 <a href="http://v2mm.tech/">v2mm</a> 上讨论。<br><a href="http://v2mm.tech/">v2mm</a> 是我创建的一个自由职业者论坛，欢迎加入 <a href="http://v2mm.tech/">v2mm</a>,  winter is coming.</p>
+                <p>Hi, I hope you’ve had a great week of learning languages and coding! As someone learning Swedish myself, I know how tough it can be — especially if you’re shy like me and feel awkward speaking with native speakers. Reading news articles? Even harder, with all the unfamiliar words.</p>
+<p>That’s exactly why I built <a href="https://github.com/pnlpal/dictionariez#ordb%C3%B6cker-download-links">Ordböcker</a>: an all-in-one dictionary app to make Swedish learning easier and less intimidating.</p>
+<p><img src="https://pnl.dev/assets/uploads/files/1749997402216-marquee-promo.png" alt="Marquee Promo.png"> </p>
+<p>With Ordböcker, you can instantly look up any word on a webpage—just <strong>double-click</strong> it. You’ll get definitions from multiple trusted sources with one click on the icon. <strong>Vocabulary</strong> is the biggest challenge when reading Swedish news—that’s exactly what Ordböcker helps with.</p>
+<p>For example, my wife, who’s an intermediate learner, prefers <strong>svenska.se</strong> for Swedish–Swedish definitions. I’m still a beginner, so I stick with <strong>Glosbe</strong>.</p>
+<p>Here are some dictionaries I find helpful and set as default, but you can suggest more:<br>🔹 Beginner-friendly:<br>Glosbe (Swedish–English)<br>Reverso (context examples)<br>Captionz (YouTube examples)<br>🔹 Intermediate:<br>Svenska.se (SAOL, SO, SAOB—all in one)</p>
+<p>Ordböcker also lets you export your word history to <strong>Anki flashcards</strong> with just one click—super handy if you’re serious about remembering what you’ve learned.</p>
+<p>If you haven’t tried Anki yet, it’s a fantastic app that helps you review words over time using <strong>spaced repetition</strong> (a fancy way of saying it reminds you just before you’re about to forget).</p>
+<p>Honestly, Anki is my secret weapon for learning languages. I owe half my Swedish vocabulary to it—and now with Ordböcker, adding new words takes less effort.</p>
+<p>Swedish verbs change differently, so I also wanted it to find the root form of words—not all dictionary tools can do that. Certainly <a href="https://github.com/pnlpal/dictionariez?tab=readme-ov-file#dictionariez">Dictionariez</a> is more focused on English, and don’t really prioritize Swedish. For example, when I look up the word fart, I want the Swedish meaning to show up first in Ordböcker.  </p>
+<p><img src="https://pnl.dev/assets/uploads/files/1749997381808-ordbo-cker1.png" alt="Ordböcker1.png"> </p>
+<p>If you’re already using Dictionariez and mainly learning Swedish through English, I recommend switching to Ordböcker. It offers most of the same features but prioritizes Swedish over English.</p>
+<p>My tip? Don’t take on too many new words at once—stay <strong>motivated</strong>, not overwhelmed.<br>Focus on words you actually see and hear often. It’s more useful to really know 10 common words than to half-remember 100 rare ones.</p>
+<p>When you add words to Anki, keep the cards simple. Just the word, a short definition, maybe an example sentence. If a card feels like homework, you’ll end up skipping it.</p>
+<p>Try to review a little bit every day. Even 5–10 minutes of Anki goes a long way—<strong>consistency</strong> really is the secret.</p>
+<p>And remember, you don’t have to understand everything right away. Getting the general idea is already a win!</p>
+<p>If you try out Ordböcker, I’d love to hear what you think. Got suggestions, ideas, or something that’s not working? Your <strong>feedback</strong> helps me make it better for everyone learning Swedish!</p>
+<p><a href="https://pnl.dev/">pnl</a></p>
+<h3 id="Download-links"><a href="#Download-links" class="headerlink" title="Download links"></a>Download links</h3><ul>
+<li><a href="https://chromewebstore.google.com/detail/ordb%C3%B6cker-swedish-learnin/mfgjnhlgimobopmfhfnemcgkdmofcmlo">Ordböcker on Chrome</a></li>
+<li><a href="https://microsoftedge.microsoft.com/addons/detail/ordb%C3%B6cker-swedish-learni/lbghhcchdjnppebeaocohpiiekimdfdb">Ordböcker on Microsoft Edge</a></li>
+<li><a href="https://addons.mozilla.org/en-US/firefox/addon/ordb%C3%B6cker/">Ordböcker on Firefox</a></li>
+</ul>
 
 
                 <hr>
@@ -231,13 +233,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/11/11/Read-articles-look-up-new-words-and-export-to-anki-the-way-I-learn-English/" data-toggle="tooltip" data-placement="top" title="Read articles, look up new words and export to anki, the way I learn English">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2016/10/27/NodeBB-2-定制主题/" data-toggle="tooltip" data-placement="top" title="NodeBB 2: 定制主题">Next Post &rarr;</a>
+                            <a href="/2025/06/10/PNL-Reader-A-shining-new-reader-app-on-browsers/" data-toggle="tooltip" data-placement="top" title="PNL Reader: A shining new reader app on browsers">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -294,8 +292,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "riverrun";
-    var disqus_identifier = "https://revir.github.io/2016/10/27/NodeBB-3-mongodb-%E4%B8%8E-redis/";
-    var disqus_url = "https://revir.github.io/2016/10/27/NodeBB-3-mongodb-%E4%B8%8E-redis/";
+    var disqus_identifier = "https://revir.github.io/2025/06/15/Ordbocker-The-all-in-one-dictionary-app-for-learning-Swedish/";
+    var disqus_url = "https://revir.github.io/2025/06/15/Ordbocker-The-all-in-one-dictionary-app-for-learning-Swedish/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
