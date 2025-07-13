@@ -15,12 +15,12 @@
   <link rel="shortcut icon" href="/img/favicon.ico" />
 
   <title>
-     River的博客 | River&#39;s Blog 
+     Coding: Google Search Console reports duplicate field url - River的博客 | River&#39;s Blog 
   </title>
 
   <link
     rel="canonical"
-    href="https://revir.github.io/"
+    href="https://revir.github.io/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/"
   />
 
   <!-- Bootstrap Core CSS -->
@@ -152,352 +152,117 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://revir.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>River&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">programming and language learner</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#-- SEO -- Google Search Console -- pnl.dev -- bugfix" title="-- SEO -- Google Search Console -- pnl.dev -- bugfix">-- SEO -- Google Search Console -- pnl.dev -- bugfix</a>
+                        
+                    </div>
+                    <h1>Coding: Google Search Console reports duplicate field url</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by River Young on
+                        2025-07-13
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-                <!-- Main Content -->
+                <p>Google Search Console reports a critical issue ⚠️ for <a href="https://pnl.dev/">pnl.dev</a>: a ‘duplicate URL property’ is preventing my website from being indexed 🚫.</p>
+<p>It turns out the problem was caused by a small HTML attribute: <code>itemprop=&quot;url&quot;</code> 🧩. This attribute is part of <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata">Microdata</a>, used to define metadata for search engines. But if misused, it can confuse crawlers and hurt indexing 📉.</p>
+<p><img src="/img/post/seo/duplicate-field-url.png" alt="screenshot of the issue on google search console"></p>
+<h2 id="What-is-itemprop-url"><a href="#What-is-itemprop-url" class="headerlink" title="What is itemprop=&quot;url&quot;?"></a>What is <code>itemprop=&quot;url&quot;</code>?</h2><p>The <code>itemprop</code> attribute is used within <a href="https://schema.org/">Schema.org</a> microdata to specify properties of an item. For example, when marking up a website’s organization or a person, you might use:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://example.com&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;url&quot;</span>&gt;</span>Visit this Site<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-
-<div class="post-preview">
-
-    <a href="/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/">
-        <h2 class="post-title">
-            Coding: Google Search Console reports duplicate field url
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Google Search Console reports a critical issue ⚠️ for pnl.dev: a ‘duplicate URL property’ is preventing my website from being indexed 🚫.
-It turns out the problem was caused by a small HTML attribu......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2025-07-13
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2025/06/29/Captionz-major-update-to-make-youtube-more-fun-and-useful/">
-        <h2 class="post-title">
-            Captionz - major update to make youtube more fun and useful.
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Hej! Hope you had an awesome weekend.
-Just wanted to share an update I’m really excited about: I’ve been working on Captionz, and it just got a major upgrade! 🎉 It now supports language-specific s......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2025-06-29
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2025/06/15/Ordbocker-The-all-in-one-dictionary-app-for-learning-Swedish/">
-        <h2 class="post-title">
-            Ordböcker: The all-in-one dictionary app for learning Swedish.
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Hi, I hope you’ve had a great week of learning languages and coding! As someone learning Swedish myself, I know how tough it can be — especially if you’re shy like me and feel awkward speaking with......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2025-06-15
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2025/06/10/PNL-Reader-A-shining-new-reader-app-on-browsers/">
-        <h2 class="post-title">
-            PNL Reader: A shining new reader app on browsers
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Dear Netizens and Web Novel Enthusiasts,
-I’m excited to announce that PNL Reader is finally here! After a week of development sprint, it just hits the first milestone, and I’m already using it to r......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2025-06-10
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/01/18/Just-got-a-big-donation-from-an-admirable-man-for-my-opensource-projects/">
-        <h2 class="post-title">
-            Just got a big donation from an admirable man for my open-source projects
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('iframe').onload = function() {
-        this.style.height=this.offsetWidth > 768 ? (this.offsetWidth/2.67) +"px" : ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2021-01-18
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2021/01/16/Spotify-on-Chrome/">
-        <h2 class="post-title">
-            Spotify on Chrome
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Install
-chrome web store
-
-Spotify on ChromeA mini Spotify player on Chrome which might save you some time. 
-
-Spotify has a really cool feature called Spotify Connect. So what is it?
-
-Here is a good......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2021-01-16
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/12/21/Captionz-learn-on-YouTube-with-fun/">
-        <h2 class="post-title">
-            Captionz: learn on YouTube with fun
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-Ever wanted to watch YouTube videos to learn a language? I made a site called Captionz might be helpful.As I am learning English and Japanese, YouTube has so many great resources for learning lang......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2020-12-21
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/12/02/I-put-a-spotify-player-on-Dictionariez/">
-        <h2 class="post-title">
-            I put a spotify player on Dictionariez
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-
-One day when I was trying to make Dictionariez more user friendly, I saw that Spotify has provided a web SDK. A silly idea occurred to me, why not make a spotify player on Dictionariez?After I di......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2020-12-02
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/11/18/Dictonariez-not-just-a-dictionary-app/">
-        <h2 class="post-title">
-            Dictonariez: not just a dictionary app
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-
-It started with a simple dictionary tool on browsers, maybe the simplest one compared with a lot of other options.It started a long time ago as a side project. Then it turned out to be my most us......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2020-11-18
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/11/15/Dictionariez-supports-Portuguese-and-Russian-now-with-v2-4-0/">
-        <h2 class="post-title">
-            Dictionariez supports Portuguese and Russian now with v2.4.0
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Short video introductions about Portuguese and Russian support.
-Portuguese:
-
-Russian:
-
-It’s really straightforward. It might be the simplest dictionary app on the browsers. So my goal is to make it......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by River Young on
-        2020-11-15
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-        <li class="next">
-            <a href="/page/2/">Older Posts &rarr;</a>
-        </li>
-    
+<p>This tells search engines that the link is the canonical URL for the entity.</p>
+<h2 id="The-Problem-with-Duplicate-URLs"><a href="#The-Problem-with-Duplicate-URLs" class="headerlink" title="The Problem with Duplicate URLs"></a>The Problem with Duplicate URLs</h2><p>If multiple elements on a page use <code>itemprop=&quot;url&quot;</code> with the same or conflicting values, search engines may get confused about which URL is the “official” one. This can lead to:</p>
+<ul>
+<li><strong>Indexing issues</strong>: Google may skip or incorrectly index your page.</li>
+<li><strong>Rich result errors</strong>: Structured data may not be eligible for enhancements in search results.</li>
+<li><strong>Manual actions</strong>: In rare cases, repeated misuse can trigger manual penalties.</li>
 </ul>
+<h2 id="How-I-Diagnosed-the-Issue"><a href="#How-I-Diagnosed-the-Issue" class="headerlink" title="How I Diagnosed the Issue"></a>How I Diagnosed the Issue</h2><ol>
+<li><strong>Google Search Console</strong>: The error message pointed to a duplicate URL property.</li>
+<li><strong>HTML Inspection</strong>: I searched for all instances of <code>itemprop=&quot;url&quot;</code> in my templates.</li>
+<li><strong>Validation Tools</strong>: I used the <a href="https://search.google.com/test/rich-results">Rich Results Test</a> and <a href="https://validator.schema.org/">Schema Markup Validator</a> to confirm the problem.</li>
+</ol>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
+<li><strong>Remove unnecessary <code>itemprop=&quot;url&quot;</code> attributes</strong> from elements that don’t represent the canonical URL.</li>
+<li><strong>Ensure only one canonical URL per entity</strong> is marked up with <code>itemprop=&quot;url&quot;</code>.</li>
+<li><strong>Test again</strong> with Google’s tools to verify the fix.</li>
+</ul>
+<h2 id="Key-Takeaways"><a href="#Key-Takeaways" class="headerlink" title="Key Takeaways"></a>Key Takeaways</h2><ul>
+<li>Validate your structured data after making template changes.</li>
+<li>Use <code>itemprop=&quot;url&quot;</code> only where it makes sense semantically.</li>
+<li>Duplicate or conflicting microdata can harm your SEO.</li>
+</ul>
+<p><strong>Lesson learned:</strong> Even small HTML attributes can have a big impact on how search engines see your site. Keep an eye on your Google Search Console, and always validate your structured data after changes to avoid unexpected SEO issues.</p>
 
 
+                <hr>
 
-                <!-- 如果开启评论功能 -->
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2025/06/29/Captionz-major-update-to-make-youtube-more-fun-and-useful/" data-toggle="tooltip" data-placement="top" title="Captionz - major update to make youtube more fun and useful.">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
-
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img style="border-radius: 50%" src="/img/avatar.jpg" />
-                        
-
-                        
-                            <p>Just a boy having fun.</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://twitter.com/pnlpal">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/pnlpal">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-
-                            
-                        </ul>
-                    </div>
-                </section>
 
                 <!-- Friends Blog -->
                 
@@ -515,9 +280,64 @@ It’s really straightforward. It might be the simplest dictionary app on the br
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "riverrun";
+    var disqus_identifier = "https://revir.github.io/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/";
+    var disqus_url = "https://revir.github.io/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:https://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          placement: 'right'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
