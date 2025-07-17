@@ -50,3 +50,7 @@ If multiple elements on a page use `itemprop="url"` with the same or conflicting
 - Duplicate or conflicting microdata can harm your SEO.
 
 **Lesson learned:** Even small HTML attributes can have a big impact on how search engines see your site. Keep an eye on your Google Search Console, and always validate your structured data after changes to avoid unexpected SEO issues.
+
+----
+**Update:** After a few days of monitoring and re-validating with Google's tools, the issue was resolved. Google Search Console now reports no errors, and my site is being indexed correctly. A small fix made a big difference!
+![screenshot of the result on google search console](/img/post/seo/2.png)
