@@ -15,12 +15,12 @@
   <link rel="shortcut icon" href="/img/favicon.ico" />
 
   <title>
-     Coding: Google Search Console reports duplicate field url - River的博客 | River&#39;s Blog 
+     🎉🎉🎉PNL Pro is finally here, check out the 90% off Launch Deal! 🚀 - River的博客 | River&#39;s Blog 
   </title>
 
   <link
     rel="canonical"
-    href="https://revir.github.io/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/"
+    href="https://revir.github.io/2025/10/07/🎉🎉🎉PNL-Pro-is-finally-here-check-out-the-90-off-Launch-Deal-🚀/"
   />
 
   <!-- Bootstrap Core CSS -->
@@ -170,14 +170,16 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#-- SEO -- Google Search Console -- pnl.dev -- bugfix" title="-- SEO -- Google Search Console -- pnl.dev -- bugfix">-- SEO -- Google Search Console -- pnl.dev -- bugfix</a>
+                          <a class="tag" href="/tags/#Dictionariez" title="Dictionariez">Dictionariez</a>
+                        
+                          <a class="tag" href="/tags/#PNL Pro" title="PNL Pro">PNL Pro</a>
                         
                     </div>
-                    <h1>Coding: Google Search Console reports duplicate field url</h1>
+                    <h1>🎉🎉🎉PNL Pro is finally here, check out the 90% off Launch Deal! 🚀</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by River Young on
-                        2025-07-13
+                        2025-10-07
                     </span>
                 </div>
             </div>
@@ -196,37 +198,55 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Google Search Console reports a critical issue ⚠️ for <a href="https://pnl.dev/">pnl.dev</a>: a ‘duplicate URL property’ is preventing my website from being indexed 🚫.</p>
-<p>It turns out the problem was caused by a small HTML attribute: <code>itemprop=&quot;url&quot;</code> 🧩. This attribute is part of <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata">Microdata</a>, used to define metadata for search engines. But if misused, it can confuse crawlers and hurt indexing 📉.</p>
-<p><img src="/img/post/seo/duplicate-field-url.png" alt="screenshot of the issue on google search console"></p>
-<h2 id="What-is-itemprop-url"><a href="#What-is-itemprop-url" class="headerlink" title="What is itemprop=&quot;url&quot;?"></a>What is <code>itemprop=&quot;url&quot;</code>?</h2><p>The <code>itemprop</code> attribute is used within <a href="https://schema.org/">Schema.org</a> microdata to specify properties of an item. For example, when marking up a website’s organization or a person, you might use:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://example.com&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;url&quot;</span>&gt;</span>Visit this Site<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>This tells search engines that the link is the canonical URL for the entity.</p>
-<h2 id="The-Problem-with-Duplicate-URLs"><a href="#The-Problem-with-Duplicate-URLs" class="headerlink" title="The Problem with Duplicate URLs"></a>The Problem with Duplicate URLs</h2><p>If multiple elements on a page use <code>itemprop=&quot;url&quot;</code> with the same or conflicting values, search engines may get confused about which URL is the “official” one. This can lead to:</p>
-<ul>
-<li><strong>Indexing issues</strong>: Google may skip or incorrectly index your page.</li>
-<li><strong>Rich result errors</strong>: Structured data may not be eligible for enhancements in search results.</li>
-<li><strong>Manual actions</strong>: In rare cases, repeated misuse can trigger manual penalties.</li>
-</ul>
-<h2 id="How-I-Diagnosed-the-Issue"><a href="#How-I-Diagnosed-the-Issue" class="headerlink" title="How I Diagnosed the Issue"></a>How I Diagnosed the Issue</h2><ol>
-<li><strong>Google Search Console</strong>: The error message pointed to a duplicate URL property.</li>
-<li><strong>HTML Inspection</strong>: I searched for all instances of <code>itemprop=&quot;url&quot;</code> in my templates.</li>
-<li><strong>Validation Tools</strong>: I used the <a href="https://search.google.com/test/rich-results">Rich Results Test</a> and <a href="https://validator.schema.org/">Schema Markup Validator</a> to confirm the problem.</li>
-</ol>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><ul>
-<li><strong>Remove unnecessary <code>itemprop=&quot;url&quot;</code> attributes</strong> from elements that don’t represent the canonical URL.</li>
-<li><strong>Ensure only one canonical URL per entity</strong> is marked up with <code>itemprop=&quot;url&quot;</code>.</li>
-<li><strong>Test again</strong> with Google’s tools to verify the fix.</li>
-</ul>
-<h2 id="Key-Takeaways"><a href="#Key-Takeaways" class="headerlink" title="Key Takeaways"></a>Key Takeaways</h2><ul>
-<li>Validate your structured data after making template changes.</li>
-<li>Use <code>itemprop=&quot;url&quot;</code> only where it makes sense semantically.</li>
-<li>Duplicate or conflicting microdata can harm your SEO.</li>
-</ul>
-<p><strong>Lesson learned:</strong> Even small HTML attributes can have a big impact on how search engines see your site. Keep an eye on your Google Search Console, and always validate your structured data after changes to avoid unexpected SEO issues.</p>
+                <p><img src="/img/post/pnl-pro/plan.png" alt="screenshot of PNL Pro plans"></p>
+<p>After a long journey, I’m thrilled to announce that PNL Pro is now live with version v6.0.0 on <a href="https://github.com/pnlpal/dictionariez?tab=readme-ov-file#dictionariez">Dictionariez</a><br>! It took time and care to get here, and I’m so excited to share this milestone with you.<br>Thank you for being part of this adventure! 🌟</p>
 <hr>
-<p><strong>Update:</strong> After a few days of monitoring and re-validating with Google’s tools, the issue was resolved. Google Search Console now reports no errors, and my site is being indexed correctly. A small fix made a big difference!<br><img src="/img/post/seo/2.png" alt="screenshot of the result on google search console"></p>
+<h2 id="✨-Free-Features-Added-Along-the-Way"><a href="#✨-Free-Features-Added-Along-the-Way" class="headerlink" title="✨ Free Features Added Along the Way"></a>✨ Free Features Added Along the Way</h2><p>While working on Pro, I didn’t stand still. In the meantime, I’ve added several highly requested features for everyone:</p>
+<ul>
+<li>📖 <strong>PNL Reader:</strong> A brand-new tool to make any web page easier and prettier to read. Enjoy a distraction-free reading experience right in your browser!</li>
+<li>📄 <strong>PDF Reader:</strong> Now fully compatible with Dictionariez, so you can look up words directly in PDFs. This was one of the most requested features from users, and I’m happy to deliver it for free.</li>
+</ul>
+<p>These updates make the PNL platform more powerful and useful for all users, whether you’re using the free or Pro version.</p>
+<hr>
+<h2 id="🆕-What’s-New-in-v6-0-0"><a href="#🆕-What’s-New-in-v6-0-0" class="headerlink" title="🆕 What’s New in v6.0.0?"></a>🆕 What’s New in v6.0.0?</h2><p>Here’s what’s included in the latest release:</p>
+<ul>
+<li>🏅 <strong>Introduced PNL Pro:</strong> Unlock advanced features and support the project.</li>
+<li>☁️ <strong>Enabled cloud sync for local history (Pro users):</strong> No more worrying about Chrome’s storage quota—sync unlimited words across devices.</li>
+<li>🗑️ <strong>Automatically remove oldest history items when exceeding Chrome storage quota:</strong> For free users, your oldest words are now automatically managed so you don’t lose recent lookups.</li>
+<li>🖱️ <strong>Added <code>dblclick</code> option:</strong> You can now choose to trigger lookup only on double-click, for more control.</li>
+<li>🧐 <strong>Improved word validation checks:</strong> More accurate detection of valid words in any language.</li>
+<li>🧪 <strong>Expanded unit test coverage:</strong> Even more reliable and robust.</li>
+</ul>
+<hr>
+<h2 id="☁️-Why-Cloud-Sync-Matters"><a href="#☁️-Why-Cloud-Sync-Matters" class="headerlink" title="☁️ Why Cloud Sync Matters"></a>☁️ Why Cloud Sync Matters</h2><p>The main feature of PNL Pro right now is <strong>Cloud Sync</strong>. Chrome extensions have a strict storage quota, you can only save about 500 words before you start losing your oldest entries. With Cloud Sync, you get <strong>unlimited word history</strong>:</p>
+<ul>
+<li>🚫 No more worrying about losing words you’ve looked up.</li>
+<li>🔄 Your history and preferences are safely stored and accessible across all your devices.</li>
+</ul>
+<hr>
+<h2 id="🗺️-What’s-Next-The-Roadmap"><a href="#🗺️-What’s-Next-The-Roadmap" class="headerlink" title="🗺️ What’s Next? The Roadmap"></a>🗺️ What’s Next? The Roadmap</h2><p>PNL Pro is just getting started! Here’s what’s planned for the future:</p>
+<ul>
+<li>🤖 <strong>AI-Powered Definitions:</strong> Get word definitions from advanced AI models. Since AI services have real costs, this feature will be part of the Pro plan.</li>
+<li>🔊 <strong>Read Out Loud with AI Pronunciation:</strong> In PNL Reader, you’ll soon be able to have web content read aloud with natural AI voices — perfect for language learners and accessibility.</li>
+<li>Auto translate subtitles to your language on Captionz for any video.</li>
+</ul>
+<p>Your support as a Pro user will help make these features possible!</p>
+<hr>
+<h2 id="🏷️-90-Off-Launch-Deal"><a href="#🏷️-90-Off-Launch-Deal" class="headerlink" title="🏷️ 90% Off Launch Deal"></a>🏷️ 90% Off Launch Deal</h2><p>To celebrate, I’m offering an <strong>exclusive 90% off launch deal</strong> for early adopters.<br>Get PNL Pro for as little as <strong>4.2 SEK &#x2F; $0.45</strong> (regular price 42 SEK &#x2F; $4.50) if you sign up now!</p>
+<blockquote>
+<p>⏳ This is a limited-time offer to thank our amazing community and gather feedback from our first Pro users.</p>
+</blockquote>
+<hr>
+<h2 id="🚀-How-to-Upgrade"><a href="#🚀-How-to-Upgrade" class="headerlink" title="🚀 How to Upgrade"></a>🚀 How to Upgrade</h2><ol>
+<li>Open Dictionariez or visit <a href="https://pnl.dev/pro">pnl.dev&#x2F;pro</a>.</li>
+<li>Complete your purchase and enjoy cloud sync instantly!</li>
+</ol>
+<hr>
+<h2 id="🙏-Thank-You"><a href="#🙏-Thank-You" class="headerlink" title="🙏 Thank You"></a>🙏 Thank You</h2><p>Thank you for your patience and support throughout this journey. Your feedback and encouragement have been invaluable in making PNL Pro a reality.<br>I can’t wait to see how cloud sync and all the new features help you on your language journey — and I look forward to building even more great tools with your support.</p>
+<p>If you have any questions or suggestions, please reach out.<br>Happy exploring and learning! 🌍</p>
+<hr>
+<p><strong>Ready to go Pro? <a href="https://pnl.dev/pro">Upgrade now and save 90%!</a></strong></p>
+<p><img src="/img/post/pnl-pro/options-page.png" alt="screenshot of Dictionariez options page"></p>
 
 
                 <hr>
@@ -235,13 +255,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2025/10/07/🎉🎉🎉PNL-Pro-is-finally-here-check-out-the-90-off-Launch-Deal-🚀/" data-toggle="tooltip" data-placement="top" title="🎉🎉🎉PNL Pro is finally here, check out the 90% off Launch Deal! 🚀">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2025/06/29/Captionz-major-update-to-make-youtube-more-fun-and-useful/" data-toggle="tooltip" data-placement="top" title="Captionz - major update to make youtube more fun and useful.">Next Post &rarr;</a>
+                            <a href="/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/" data-toggle="tooltip" data-placement="top" title="Coding: Google Search Console reports duplicate field url">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -298,8 +314,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "riverrun";
-    var disqus_identifier = "https://revir.github.io/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/";
-    var disqus_url = "https://revir.github.io/2025/07/13/Coding-Google-Search-Console-reports-duplicate-field-url/";
+    var disqus_identifier = "https://revir.github.io/2025/10/07/%F0%9F%8E%89%F0%9F%8E%89%F0%9F%8E%89PNL-Pro-is-finally-here-check-out-the-90-off-Launch-Deal-%F0%9F%9A%80/";
+    var disqus_url = "https://revir.github.io/2025/10/07/%F0%9F%8E%89%F0%9F%8E%89%F0%9F%8E%89PNL-Pro-is-finally-here-check-out-the-90-off-Launch-Deal-%F0%9F%9A%80/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
