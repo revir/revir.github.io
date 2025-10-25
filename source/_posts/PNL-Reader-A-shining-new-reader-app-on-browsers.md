@@ -2,6 +2,7 @@
 title: 'PNL Reader: A shining new reader app on browsers'
 date: 2025-06-10 22:02:05
 tags:
+    - PNL Reader
     - Chrome Extension
     - Firefox Addon
 
